@@ -1,0 +1,81 @@
+% assignmentheader.sty
+% Reusable header for CUI engineering assignments/exams
+%
+% Usage:
+%   \usepackage{assignmentheader}
+%   \assignmentheader{
+%       title={Assignment 1},
+%       course={Engineering Mathematics},
+%       class={BEE 4B},
+%       marks={25},
+%       deadline={18th September 2026},
+%       instructor={Dr Junaid Ahmed}
+%   }
+%
+% The same header can be reused for future assignments by changing
+% only the values in the \assignmentheader command.
+\RequirePackage{graphicx}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{assignmentheader}[2026/09/18 Reusable CUI assignment header]
+
+\RequirePackage{fancyhdr}
+\RequirePackage{array}
+\RequirePackage{xkeyval}
+
+\makeatletter
+
+\def\ah@title{Assignment}
+\def\ah@course{}
+\def\ah@class{}
+\def\ah@marks{}
+\def\ah@deadline{}
+\def\ah@instructor{}
+
+\define@key{assignmentheader}{title}{\def\ah@title{#1}}
+\define@key{assignmentheader}{course}{\def\ah@course{#1}}
+\define@key{assignmentheader}{class}{\def\ah@class{#1}}
+\define@key{assignmentheader}{marks}{\def\ah@marks{#1}}
+\define@key{assignmentheader}{deadline}{\def\ah@deadline{#1}}
+\define@key{assignmentheader}{instructor}{\def\ah@instructor{#1}}
+
+\newcommand{\assignmentheader}[1]{%
+    \setkeys{assignmentheader}{#1}%
+
+    \noindent\hspace*{-0.6cm}%
+    \begin{minipage}[t]{0.18\textwidth}
+        \vspace{-12pt}
+        \includegraphics[width=0.85\linewidth]{comsats.png}
+    \end{minipage}%
+    \begin{minipage}[t]{0.80\textwidth}
+        \centering
+        \vspace{0pt}
+        {\large\bfseries COMSATS University Islamabad (CUI)\par}
+        {\large\bfseries Islamabad Campus\par}
+        {\large\bfseries Department of Electrical Engineering\par}
+        \vspace{4pt}
+        {\Large\bfseries \ah@title\par}
+        {\large\bfseries \ah@course\par}
+    \end{minipage}
+
+    \vspace{6pt}
+    \noindent
+    \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l l}
+        \begin{minipage}[t]{0.5\linewidth}
+            \raggedright
+            \textbf{Class:} \ah@class\\
+            \textbf{Instructor:} \ah@instructor
+        \end{minipage}
+        &
+        \begin{minipage}[t]{0.4\linewidth}
+            \raggedleft
+            \textbf{Marks:} \ah@marks\\
+            \textbf{Deadline:} \ah@deadline
+        \end{minipage}
+    \end{tabular*}
+
+    \vspace{8pt}
+    \hrule
+    \vspace{10pt}
+}
+
+\makeatother
