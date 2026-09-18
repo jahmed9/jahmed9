@@ -1,0 +1,66 @@
+% solutionheader.sty
+% Reusable header for CUI engineering assignment SOLUTIONS
+% (for students to use when typesetting their submissions)
+%
+% Usage:
+%   \usepackage{solutionheader}
+%   \solutionheader{
+%       title={Engineering Mathematics},
+%       coursecode={EEE330},
+%       assignment={Assignment 1},
+%       name={Full Name},
+%       regno={FA22-BEE-123}
+%   }
+%
+% Place \solutionheader{...} once, right after \begin{document}.
+\RequirePackage{graphicx}
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{solutionheader}[2026/09/18 Reusable CUI assignment solution header]
+
+\RequirePackage{array}
+\RequirePackage{xkeyval}
+
+\makeatletter
+
+\def\sh@title{}
+\def\sh@coursecode{}
+\def\sh@assignment{Assignment}
+\def\sh@name{}
+\def\sh@regno{}
+
+\define@key{solutionheader}{title}{\def\sh@title{#1}}
+\define@key{solutionheader}{coursecode}{\def\sh@coursecode{#1}}
+\define@key{solutionheader}{assignment}{\def\sh@assignment{#1}}
+\define@key{solutionheader}{name}{\def\sh@name{#1}}
+\define@key{solutionheader}{regno}{\def\sh@regno{#1}}
+
+\newcommand{\solutionheader}[1]{%
+    \setkeys{solutionheader}{#1}%
+
+    \begin{center}
+        {\Large\bfseries \sh@title\par}
+        {\large\bfseries \sh@assignment\ --- Solution\par}
+    \end{center}
+
+    \vspace{6pt}
+    \noindent
+    \begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l l}
+        \begin{minipage}[t]{0.5\linewidth}
+            \raggedright
+            \textbf{Name:} \sh@name\\
+            \textbf{Reg. No.:} \sh@regno
+        \end{minipage}
+        &
+        \begin{minipage}[t]{0.4\linewidth}
+            \raggedleft
+            \textbf{Course Code:} \sh@coursecode\\
+            \textbf{Assignment:} \sh@assignment
+        \end{minipage}
+    \end{tabular*}
+
+    \vspace{8pt}
+    \hrule
+    \vspace{10pt}
+}
+
+\makeatother
